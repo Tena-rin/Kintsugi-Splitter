@@ -1,29 +1,68 @@
 # Kintsugi-Dataset
-This repository contains the **Kintsugi 3D dataset**, a collection of broken ceramic objects represented as point clouds, meshes, and masks.  
-The dataset is designed for research in **3D reconstruction, computer vision, and cultural heritage restoration**.
+
+This repository provides the **Kintsugi dataset**, a sustainable and aesthetic collection of ceramic repair data.  
+Unlike conventional 3D fracture datasets that focus only on geometry, this dataset captures the **artistic and cultural aspects of kintsugi**, the traditional Japanese technique of repairing broken pottery with gold seams.  
+It is designed to support research in **3D reconstruction, computer vision, cultural heritage preservation, and AI systems that go beyond recognition to embrace artistic meaning**.
+
 
 ---
 
 ## Dataset Contents
 
-The dataset is organized as follows:
+The dataset is organized into two main categories: **Artificial** and **Real**.  
+
 
 ```
-kintsugi-3d-dataset/
+Kintsugi_Data/
 │
-├── images/           # Input RGB images
-├── masks/            # Binary masks highlighting fracture or repair regions
-├── pointclouds/      # 3D point clouds in PLY format
-├── meshes/           # Mesh reconstructions (OBJ/STL)
-├── metadata.json     # Metadata and annotations
-└── README.md         # This file
+├── Artificial/                  # Artificially generated kintsugi-like plates
+│   ├── circle_plate/            # Circle plate example
+│   │   ├── circle_plate.ply
+│   │   ├── piece_0.ply
+│   │   └── piece_1.ply
+│   ├── octangle_plate/
+│   │   ├── octangle_plate.ply
+│   │   └── piece_*.ply
+│   └── square_plate/
+│       ├── square_plate.ply
+│       └── piece_*.ply
+│
+└── Real/                        
+    ├── yobitsugi/               
+    │   ├── yobitsugi_1/
+    │   │   ├── yobitsugi_1.ply
+    │   │   ├── yobitsugi_1.txt
+    │   │   ├── piece_0.ply
+    │   │   ├── piece_1.ply
+    │   │   ├── piece_2.ply
+    │   │   └── piece_3.ply    # 例として4ピース
+    │   ├── yobitsugi_2/  ...
+    │   └── yobitsugi_6/
+    │
+    └── kintsugi/
+        ├── kintsugi_1/
+        │   ├── kintsugi_1.ply
+        │   ├── kintsugi_1.txt
+        │   ├── piece_0.ply
+        │   ├── piece_1.ply
+        │   ├── piece_2.ply
+        │   ├── piece_3.ply
+        │   ├── piece_4.ply
+        │   └── piece_5.ply    # 例として6ピース
+        ├── kintsugi_2/ ...
+        └── kintsugi_4/
+
+
 ```
 
-- **Images**: High-resolution photographs of broken and repaired objects  
-- **Masks**: Pixel-level annotations of cracks or gold repair lines  
-- **Pointclouds**: Point sets extracted from multi-view or depth data  
-- **Meshes**: 3D reconstructed surfaces for downstream tasks  
-- **Metadata**: Object ID, capture conditions, and annotation details  
+### Notes
+- Each folder contains:
+  - A full repaired object point cloud (`*_n.ply`)  
+  - A text file (`*_n.txt`) describing the repair process and artistic intent  
+  - Fragment-level point clouds (`piece_*.ply`)  
+- The number of fragments varies by case (e.g., *yobitsugi_1* has 4 pieces, *kintsugi_1* has 6 pieces).  
+- Other cases follow the same structure.
+
 
 ---
 
@@ -56,7 +95,7 @@ If you use this dataset in your research, please cite:
 
 ```
 @dataset{kintsugi_3d_2025,
-  author       = {Your Name and Collaborators},
+  author       = {Nao Uematsu},
   title        = {Kintsugi 3D Dataset},
   year         = {2025},
   publisher    = {GitHub},
