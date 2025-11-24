@@ -1,6 +1,6 @@
 # Kintsugi-Dataset
 
-This repository provides the **Kintsugi dataset**, a sustainable and aesthetic collection of ceramic repair data.  
+This repository provides the **Kintsugi dataset**, a sustainable and beautiful collection of ceramic repair data.  
 Unlike conventional 3D fracture datasets that focus only on geometry, this dataset captures the **artistic and cultural aspects of kintsugi**, the traditional Japanese technique of repairing broken pottery with gold seams.  
 It is designed to support research in **3D reconstruction, computer vision, cultural heritage preservation, and AI systems that go beyond recognition to embrace artistic meaning**.
 
@@ -35,7 +35,7 @@ Kintsugi_Data/
     │   │   ├── piece_0.ply
     │   │   ├── piece_1.ply
     │   │   ├── piece_2.ply
-    │   │   └── piece_3.ply    # 例として4ピース
+    │   │   └── piece_3.ply   
     │   ├── yobitsugi_2/  ...
     │   └── yobitsugi_6/
     │
@@ -48,7 +48,7 @@ Kintsugi_Data/
         │   ├── piece_2.ply
         │   ├── piece_3.ply
         │   ├── piece_4.ply
-        │   └── piece_5.ply    # 例として6ピース
+        │   └── piece_5.ply    
         ├── kintsugi_2/ ...
         └── kintsugi_4/
 
