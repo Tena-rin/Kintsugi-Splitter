@@ -1,4 +1,4 @@
-# Kintsugi-Dataset Pipeline
+# Kintsugi-Dataset
 
 This repository provides the **processing pipeline** used to generate the Kintsugi 3D point cloud dataset  
 introduced in the associated research report.
