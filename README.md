@@ -1,4 +1,4 @@
-# Kintain Breaks
+# Kintsugi Splitter
 Digitally preserving the cultural and artistic value of kintsugi  
 **by Nao Uematsu**
 
