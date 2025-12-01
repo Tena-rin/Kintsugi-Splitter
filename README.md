@@ -1,4 +1,6 @@
 # Kintain Breaks
+Digitally preserving the cultural and artistic value of kintsugi  
+**by Nao Uematsu**
 
 Kintain Breaks is a project dedicated to **preserving the cultural, artistic, and philosophical value of kintsugi**,  
 the Japanese technique of repairing broken ceramics with gold.
@@ -298,6 +300,21 @@ This project is released under the **MIT License**.
 Kintsugi practices, artworks, and cultural inspiration were provided with respect  
 to the craftspeople and traditions that shaped them.  
 We aim to support the preservation and global appreciation of this heritage.
+
+## 📚 Citations
+
+If you find **Kintain Breaks** useful in your research or projects, please cite:
+
+```bibtex
+@misc{kintainbreaks2025,
+    title        = {Kintain Breaks},
+    author       = {Nao Uematsu},
+    year         = {2025},
+    note         = {GitHub Repository},
+    url          = {https://github.com/<YOUR_USERNAME>/<YOUR_REPO_NAME>}
+}
+```
+
 
 
 
