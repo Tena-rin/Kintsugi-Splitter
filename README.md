@@ -2,11 +2,11 @@
 Digitally preserving the cultural and artistic value of kintsugi  
 **by Nao Uematsu**
 
-Kintain Breaks is a project dedicated to **preserving the cultural, artistic, and philosophical value of kintsugi**,  
+Kintsugi Splitter is a project dedicated to **preserving the cultural, artistic, and philosophical value of kintsugi**,  
 the Japanese technique of repairing broken ceramics with gold.
 
 Rather than treating breakage as damage, kintsugi embraces it as a part of the object’s history.  
-Kintain Breaks continues this philosophy in the digital era by using **AI-based reconstruction, segmentation,  
+Kintsugi Splitter continues this philosophy in the digital era by using **AI-based reconstruction, segmentation,  
 and multimodal analysis** to archive repaired objects and make their stories accessible worldwide.
 
 ---
@@ -20,7 +20,7 @@ However, **kintsugi is not merely a physical repair technique—it is a philosop
 - *beauty in imperfection* 
 - *human intention and emotion* 
 
-**Kintain Breaks aims to preserve not only the shape,  
+**Kintsugi Splitter aims to preserve not only the shape,  
 but also the cultural essence of kintsugi and share it globally.**
 
 By combining:
@@ -37,7 +37,7 @@ the project creates a new form of digital cultural archive.
 
 ## Pipeline Overview
 
-The Kintain Breaks pipeline consists of five stages:
+The Kintsugi Splitter pipeline consists of five stages:
 
 1. **Background removal**  
    Removes photographic context to isolate the ceramic object.
@@ -56,14 +56,14 @@ The Kintain Breaks pipeline consists of five stages:
    Captures *material*, *origin*, *crafting environment*, and *artistic intent*  
    to preserve the cultural meaning behind the repair.
 
-This multi-step pipeline allows Kintain Breaks to preserve both the **form** and the **spirit**  
+This multi-step pipeline allows Kintsugi Splitter to preserve both the **form** and the **spirit**  
 of repaired objects.
 
 ---
 
 ## Usage (Minimal Working Pipeline)
 
-This section describes the **minimal steps required to run the Kintain Breaks pipeline**.
+This section describes the **minimal steps required to run the Kintsugi Splitter pipeline**.
 Following these commands will reproduce the core workflow:
 background removal → kintsugi-line detection → 3D reconstruction → fragment segmentation.
 
@@ -152,7 +152,7 @@ o3d.visualization.draw_geometries([pcd])
 
 ```python
 """
-Minimal Working Pipeline for Kintain Breaks
+Minimal Working Pipeline for Kintsugi Splitter
 Steps: Background removal → Kintsugi-line extraction → MoGe point cloud → DBSCAN fragments
 """
 
@@ -272,7 +272,7 @@ if __name__ == "__main__":
 
 ## Vision
 
-Kintain Breaks is part of a larger initiative to create a **sustainable digital archive**  
+Kintsugi Splitter is part of a larger initiative to create a **sustainable digital archive**  
 that honors Japanese craftsmanship and spreads its values—including resilience, repair,  
 and imperfect beauty—to a global audience.
 
@@ -285,7 +285,7 @@ we aim to build a foundation for future research in:
 - sustainable design  
 
 Kintsugi teaches that breakage is not an end, but a beginning.  
-Kintain Breaks brings that message to the world.
+Kintsugi Splitter brings that message to the world.
 
 ---
 
@@ -303,15 +303,15 @@ We aim to support the preservation and global appreciation of this heritage.
 
 ## 📚 Citations
 
-If you find **Kintain Breaks** useful in your research or projects, please cite:
+If you find **Kintsugi Splitter** useful in your research or projects, please cite:
 
 ```bibtex
-@misc{kintainbreaks2025,
-    title        = {Kintain Breaks},
+@misc{Kintsugi-Splitter2025,
+    title        = {Kintsugi Splitter},
     author       = {Nao Uematsu},
     year         = {2025},
     note         = {GitHub Repository},
-    url          = {https://github.com/<YOUR_USERNAME>/<YOUR_REPO_NAME>}
+    url          = {https://github.com/Tena-rin/Kintsugi-Splitter}
 }
 ```
 
