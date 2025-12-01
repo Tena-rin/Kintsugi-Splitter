@@ -16,9 +16,9 @@ and multimodal analysis** to archive repaired objects and make their stories acc
 Modern digitization often captures only geometry or appearance.  
 However, **kintsugi is not merely a physical repair technique—it is a philosophy** rooted in:
 
-- *sustainability* (長く大切に使い続ける文化)
-- *beauty in imperfection* (不完全の美)
-- *human intention and emotion* (作り手の思いや物語)
+- *sustainability*
+- *beauty in imperfection* 
+- *human intention and emotion* 
 
 **Kintain Breaks aims to preserve not only the shape,  
 but also the cultural essence of kintsugi and share it globally.**
