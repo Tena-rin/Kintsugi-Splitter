@@ -9,6 +9,8 @@ Rather than treating breakage as damage, kintsugi embraces it as a part of the o
 Kintsugi Splitter continues this philosophy in the digital era by using **AI-based reconstruction, segmentation,  
 and multimodal analysis** to archive repaired objects and make their stories accessible worldwide.
 
+![Pipeline Overview](IMG_5200.webp)
+
 ---
 
 ## Purpose
@@ -68,6 +70,8 @@ The Kintsugi Splitter pipeline consists of five stages:
 
 This multi-step pipeline allows Kintsugi Splitter to preserve both the **form** and the **spirit**  
 of repaired objects.
+
+![Pipeline Overview](pipeline.png)
 
 ---
 
