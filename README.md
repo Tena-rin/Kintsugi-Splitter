@@ -102,7 +102,7 @@ setx GEMINI_API_KEY "YOUR_API_KEY"
 
 ### 3. Prepare an input image
 
-Place your ceramic photo in the working directory:
+Place your kintsugi photo in the working directory:
 
 ```
 input.png
