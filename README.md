@@ -34,6 +34,16 @@ By combining:
 the project creates a new form of digital cultural archive.
 
 ---
+## Why Open Source?
+
+We release Kintsugi Splitter openly so that people around the world  
+can learn through kintsugi the value of repairing, cherishing,  
+and sustaining a single object rather than replacing it.
+
+This project aims to preserve not only techniques but also the  
+cultural philosophy of kintsugi for future generations.
+
+---
 
 ## Pipeline Overview
 
@@ -295,13 +305,60 @@ This project is released under the **MIT License**.
 
 ---
 
+## Dissemination
+
+Parts of this project were presented at:
+
+- Information Processing Society of Japan (IPSJ), 2025  
+- Science Conference 2025  
+- JSEC 2025 (Japan Science & Engineering Challenge)
+
+We release this project to help share the philosophy of kintsugi with the world  
+and encourage a culture of repairing, valuing, and sustaining objects.
+
+---
+
 ## Acknowledgements
 
 Kintsugi practices, artworks, and cultural inspiration were provided with respect  
 to the craftspeople and traditions that shaped them.  
 We aim to support the preservation and global appreciation of this heritage.
 
-## 📚 Citations
+---
+
+##  References
+
+### Background Removal
+- Qin, X., Zhang, Z., Huang, C., Dehghani, M., Zaidi, S., Qin, Z., & Hou, Q.  
+  **U²-Net: Going Deeper with Nested U-Structure for Salient Object Detection**.  
+  *Pattern Recognition*, 2020.  
+  https://github.com/NathanUA/U-2-Net
+
+### 3D Reconstruction (MoGe)
+- Ruicheng, W., et al.  
+  **MoGe: Accurate Monocular Geometry Estimation for Open-Domain Images**.  
+  *CVPR*, 2025.  
+  https://github.com/microsoft/MoGe
+
+### Clustering (Fragment Segmentation)
+- Ester, M., Kriegel, H.-P., Sander, J., & Xu, X.  
+  **A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise (DBSCAN)**.  
+  *KDD*, 1996.
+
+### Multimodal Modeling (Google Gemini)
+- Google DeepMind  
+  **Gemini 2.5 Flash Model Card**, 2025.  
+  https://ai.google.dev/gemini/
+
+### Background Removal Tool
+- danielgatis  
+  **rembg: Image Background Removal**  
+  GitHub Repository: https://github.com/danielgatis/rembg
+
+  
+---
+
+## Citations
 
 If you find **Kintsugi Splitter** useful in your research or projects, please cite:
 
