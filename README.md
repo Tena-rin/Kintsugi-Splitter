@@ -35,7 +35,7 @@ By combining:
 
 the project creates a new form of digital cultural archive.
 
-[![Demo](docs/example_dataset/images/kintsugi.png)](docs/example_dataset/videos/kintsugi_rotation.mp4)
+![Kintsugi Demo](example_dataset/videos/kintsugi_demo.gif)
 
 ---
 ## Why Open Source?
