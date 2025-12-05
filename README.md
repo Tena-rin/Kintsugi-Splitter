@@ -423,7 +423,21 @@ Kintsugi Splitter brings that message to the world.
 
 ## License
 
-This project is released under the **MIT License**.
+### Dataset (Images, Masks, Point Clouds, Metadata)
+This dataset is licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
+
+When using the dataset, please include the following attribution:
+
+> “Kintsugi 3D Dataset. Object courtesy of Atelier fourteen (木村いよ).”
+
+Full license: https://creativecommons.org/licenses/by/4.0/
+
+---
+
+### Code (Python scripts / tools / notebooks)
+All source code in this repository is released under the **MIT License**.  
+See `LICENSE_CODE` for details.
+
 
 ---
 
