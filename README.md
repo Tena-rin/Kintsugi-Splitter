@@ -1,6 +1,6 @@
 # Kintsugi Splitter
 Digitally preserving the cultural and artistic value of kintsugi  
-**by Nao Uematsu**
+**by Tena-rin**
 
 Kintsugi Splitter is a project dedicated to **preserving the cultural, artistic, and philosophical value of kintsugi**,  
 the Japanese technique of repairing broken ceramics with gold.
@@ -442,9 +442,7 @@ and encourage a culture of repairing, valuing, and sustaining objects.
 
 ## Acknowledgements
 
-Kintsugi practices, artworks, and cultural inspiration were provided with respect  
-to the craftspeople and traditions that shaped them.  
-We aim to support the preservation and global appreciation of this heritage.
+I would like to express my deepest gratitude to Ms. Iyo Kimura, director of Atelier fourteen, for her generous guidance on kintsugi techniques and aesthetics, as well as for kindly granting permission to use her kintsugi works in this study.
 
 ---
 
