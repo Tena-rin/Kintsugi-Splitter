@@ -52,7 +52,7 @@ cultural philosophy of kintsugi for future generations.
 
   <!-- 左：元画像 -->
   <div style="flex:1; text-align:center;">
-    <h3>Original Image</h3>
+    <h3>Input Image</h3>
     <img src="example_dataset/images/kintsugi.png" style="width:25%; max-width:300px;">
   </div>
 
