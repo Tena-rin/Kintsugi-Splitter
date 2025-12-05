@@ -58,13 +58,13 @@ cultural philosophy of kintsugi for future generations.
 
   <!-- 中央：GIF（3D動画） -->
   <div style="flex:1; text-align:center;">
-    <h3>3D Reconstruction (GIF)</h3>
+    <h3> Output: 3D point cloud </h3>
     <img src="example_dataset/videos/kintsugi_demo.gif" style="width:100%; max-width:300px;">
   </div>
 
   <!-- 右：プロンプト -->
   <div style="flex:1;">
-    <h3>Prompt</h3>
+    <h3> Output: Prompt </h3>
     <pre style="white-space:pre-wrap; font-size:14px;">
 
 A. Metadata (Objective Information)
