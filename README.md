@@ -35,7 +35,6 @@ By combining:
 
 the project creates a new form of digital cultural archive.
 
-![Kintsugi Demo](example_dataset/videos/kintsugi_demo.gif)
 
 ---
 ## Why Open Source?
@@ -46,6 +45,56 @@ and sustaining a single object rather than replacing it.
 
 This project aims to preserve not only techniques but also the  
 cultural philosophy of kintsugi for future generations.
+
+---
+## Example Output
+<div style="width:100%; display:flex; flex-direction:row; justify-content:space-between; align-items:flex-start; gap:20px;">
+
+  <!-- 左：元画像 -->
+  <div style="flex:1; text-align:center;">
+    <h3>Original Image</h3>
+    <img src="example_dataset/images/kintsugi.png" style="width:25%; max-width:300px;">
+  </div>
+
+  <!-- 中央：GIF（3D動画） -->
+  <div style="flex:1; text-align:center;">
+    <h3>3D Reconstruction (GIF)</h3>
+    <img src="example_dataset/videos/kintsugi_demo.gif" style="width:100%; max-width:300px;">
+  </div>
+
+  <!-- 右：プロンプト -->
+  <div style="flex:1;">
+    <h3>Prompt</h3>
+    <pre style="white-space:pre-wrap; font-size:14px;">
+
+A. Metadata (Objective Information)
+├── 1. Material / Texture
+│     └── Porcelain (ceramics); smooth and elegant surface
+├── 2. Kintsugi Line Color
+│     └── Gold
+├── 3. Brand / Origin
+│     ├── Imari-yaki (Hizen region, Japan)
+│     ├── Made in Japan
+│     └── Item No.: 9884-500-0027-9100
+├── 4. Production Period
+│     └── Estimated Edo period
+├── 5. Dimensions / Weight
+│     ├── Size: Φ15 cm × H 5 cm
+│     └── Weight: 305 g
+└── 6. Artist
+      └── Repaired by Iyo Kimura, Atelier fourteen
+
+
+B. Story (Subjective Information)
+├── 1. How it Was Broken
+│     └── Damaged during the Noto earthquake; received from an Imari collector
+├── 2. Artistic Considerations
+│     └── Kintsugi lines were made subtle and gentle to respect original patterns
+└── 3. Feelings Behind the Repair
+      └── “A fresh dressing” was given with hope that the piece gains a renewed future
+  </div>
+
+</div>
 
 ---
 
@@ -101,12 +150,6 @@ pip install scikit-learn
 ---
 
 ### 2. Set your Gemini API key
-
-Linux / macOS:
-
-```bash
-export GEMINI_API_KEY="YOUR_API_KEY"
-```
 
 Windows (PowerShell):
 
@@ -171,9 +214,7 @@ o3d.visualization.draw_geometries([pcd])
 Minimal Working Pipeline for Kintsugi Splitter
 Steps: Background removal → Kintsugi-line extraction → MoGe point cloud → DBSCAN fragments
 """
-
 import os
-import sys
 import io
 import cv2
 import torch
@@ -183,104 +224,164 @@ import open3d as o3d
 from PIL import Image
 from rembg import remove
 from moge.model.v1 import MoGeModel
-from google import generativeai as genai
-from sklearn.neighbors import NearestNeighbors
+from google import genai
+from google.genai import types
 from sklearn.cluster import DBSCAN
+from sklearn.neighbors import NearestNeighbors
+from colorsys import rgb_to_hsv
 
 
-# ---------------- Step 1: Background removal ----------------
-def step1_remove_background(input_path, out_path):
-    with open(input_path, "rb") as f:
-        data = f.read()
-    output = remove(data)
-    Image.open(io.BytesIO(output)).save(out_path)
+# -----------------------
+# Step 1: Background removal
+# -----------------------
+def step1_remove_background(inp, out):
+    data = remove(open(inp, "rb").read())
+    Image.open(io.BytesIO(data)).save(out)
 
 
-# ---------------- Step 2: Kintsugi-line extraction ----------------
-def step2_extract_kintsugi(input_path, out_path, api_key):
+# -----------------------
+# Step 2: Kintsugi recoloring
+# -----------------------
+def step2_recolor_kintsugi(inp, out, api_key):
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    client = genai.Client()
 
     prompt = (
-        "Recolor ONLY the golden kintsugi repair lines into #0CEE45. "
-        "Do not modify the plate. Return PNG."
+        "Detect ONLY golden kintsugi repair lines in this image. "
+        "Recolor them using a color NOT present in the plate. "
+        "Use a uniform flat color (no shading). "
+        "Do NOT modify the plate. "
+        "Return PNG."
     )
 
-    with open(input_path, "rb") as f:
-        img = f.read()
+    img = Image.open(inp).convert("RGB")
 
-    res = model.generate_content(
-        [prompt, {"mime_type": "image/png", "data": img}],
-        generation_config={"response_mime_type": "image/png"}
+    res = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=[prompt, img],
+        config=types.GenerateContentConfig(
+            response_modalities=["IMAGE"]
+        )
     )
 
-    out = base64.b64decode(res.text)
-    with open(out_path, "wb") as f:
-        f.write(out)
+    # Extract binary image output
+    part = res.candidates[0].content.parts[0]
+    binary = part.inline_data.data
+
+    with open(out, "wb") as f:
+        f.write(binary)
 
 
-# ---------------- Step 3: MoGe 3D reconstruction ----------------
-def step3_moge(input_img, out_ply):
+# -----------------------
+# Helper: Detect recolor HSV range from edited image
+# (Gemini の塗られた色を自動検出)
+# -----------------------
+def detect_recolor_hsv(original_img, recolored_img):
+    ori = np.array(Image.open(original_img).convert("RGB")) / 255.0
+    rec = np.array(Image.open(recolored_img).convert("RGB")) / 255.0
+
+    diff = np.abs(ori - rec).mean(axis=2)
+    mask = diff > 0.1   # 塗り替え部分推定
+
+    recolor_pixels = rec[mask]
+    if len(recolor_pixels) == 0:
+        raise RuntimeError("Could not detect recolor area!")
+
+    # RGB → HSV (0-255)
+    hsv = cv2.cvtColor((recolor_pixels * 255).astype(np.uint8).reshape(-1, 1, 3),
+                       cv2.COLOR_RGB2HSV).reshape(-1, 3)
+
+    h_min, s_min, v_min = hsv.min(axis=0)
+    h_max, s_max, v_max = hsv.max(axis=0)
+
+    return np.array([h_min, s_min, v_min]), np.array([h_max, s_max, v_max])
+
+
+# -----------------------
+# Step 3: MoGe depth → point cloud
+# -----------------------
+def step3_moge_to_pcd(inp, ply_out):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = MoGeModel.from_pretrained("Ruicheng/moge-vitl").to(device)
+    model = MoGeModel.from_pretrained("Ruicheng/moge-vitl").to(device).eval()
 
-    img = cv2.cvtColor(cv2.imread(input_img), cv2.COLOR_BGR2RGB)
-    img = torch.tensor(img / 255, dtype=torch.float32, device=device).permute(2, 0, 1)
+    img = cv2.cvtColor(cv2.imread(inp), cv2.COLOR_BGR2RGB)
+    img_t = torch.tensor(img / 255, dtype=torch.float32).permute(2, 0, 1).unsqueeze(0).to(device)
 
-    out = model.infer(img)
-    pts = out["points"].detach().cpu().numpy()
-    mask = out["mask"].detach().cpu().numpy() > 0
+    out = model.infer({"img": img_t})
+    pts = out["points"].detach().cpu().numpy()[0]
+    mask = out["mask"].detach().cpu().numpy()[0] > 0
 
-    pts = pts.squeeze()
-    mask = mask.squeeze()
     valid_pts = pts[mask]
 
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(valid_pts)
-    o3d.io.write_point_cloud(out_ply, pcd)
+    o3d.io.write_point_cloud(ply_out, pcd)
 
 
-# ---------------- Step 4: Fragment segmentation ----------------
-def step4_segment(pointcloud_path, out_dir):
+# -----------------------
+# Step 4: segment pieces
+# -----------------------
+def step4_segment_pieces(ply_in, hsv_lower, hsv_upper, out_dir):
     os.makedirs(out_dir, exist_ok=True)
 
-    pcd = o3d.io.read_point_cloud(pointcloud_path)
+    pcd = o3d.io.read_point_cloud(ply_in)
     pts = np.asarray(pcd.points)
 
-    nbrs = NearestNeighbors(n_neighbors=11).fit(pts)
-    d, _ = nbrs.kneighbors(pts)
-    m = (d[:, 1:].mean(axis=1) * 2).min()
+    # DBSCAN eps 自動推定
+    nbrs = NearestNeighbors(n_neighbors=10).fit(pts)
+    dist, _ = nbrs.kneighbors(pts)
+    eps = np.median(dist[:, 1:]) * 2.0
 
-    labels = DBSCAN(eps=m * 2, min_samples=20).fit_predict(pts)
+    labels = DBSCAN(eps=eps, min_samples=20).fit_predict(pts)
 
     idx = 0
     for lbl in set(labels):
         if lbl == -1:
             continue
         frag = pts[labels == lbl]
+
         pc = o3d.geometry.PointCloud()
         pc.points = o3d.utility.Vector3dVector(frag)
-        o3d.io.write_point_cloud(f"{out_dir}/piece_{idx}.ply", pc)
+        o3d.io.write_point_cloud(f"{out_dir}/piece_{idx:03d}.ply", pc)
         idx += 1
 
 
-# ---------------- Main ----------------
+# -----------------------
+# Main entry
+# -----------------------
 if __name__ == "__main__":
-    inp = sys.argv[1]
-    out = sys.argv[2]
+    import sys
 
-    os.makedirs(out, exist_ok=True)
+    inp = sys.argv[1]
+    outdir = sys.argv[2]
+    os.makedirs(outdir, exist_ok=True)
 
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        raise ValueError("Set GEMINI_API_KEY first")
+        raise ValueError("Set GEMINI_API_KEY")
 
-    step1_remove_background(inp, f"{out}/step1_removed.png")
-    step2_extract_kintsugi(f"{out}/step1_removed.png", f"{out}/step2_kintsugi.png", api_key)
-    step3_moge(f"{out}/step1_removed.png", f"{out}/pointcloud.ply")
-    step4_segment(f"{out}/pointcloud.ply", f"{out}/fragments")
+    bg = f"{outdir}/step1_removed.png"
+    rec = f"{outdir}/step2_recolored.png"
+    ply = f"{outdir}/step3_pointcloud.ply"
 
-    print("Pipeline complete.")
+    print("Step 1: background remove")
+    step1_remove_background(inp, bg)
+
+    print("Step 2: recolor kintsugi")
+    step2_recolor_kintsugi(bg, rec, api_key)
+
+    print("Detecting recolor HSV range…")
+    hsv_low, hsv_high = detect_recolor_hsv(bg, rec)
+    print("Detected HSV range:", hsv_low, hsv_high)
+
+    print("Step 3: MoGe → point cloud")
+    step3_moge_to_pcd(bg, ply)
+
+    print("Step 4: segmentation")
+    step4_segment_pieces(ply, hsv_low, hsv_high, f"{outdir}/pieces")
+
+    print("Pipeline complete!")
+
 ```
 ## Dataset Types
 
@@ -376,6 +477,12 @@ We aim to support the preservation and global appreciation of this heritage.
   **rembg: Image Background Removal**  
   GitHub Repository: https://github.com/danielgatis/rembg
 
+### Kintsugi Artist / Studio  
+- Atelier fourteen  
+  **Atelier fourteen (Official Website)**  
+  Website: https://www.atelierfourteen.com/  
+  Accessed: 2025-08-31  
+  Object courtesy
   
 ---
 
