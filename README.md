@@ -141,6 +141,7 @@ pip install open3d
 pip install opencv-python
 pip install pillow
 pip install rembg
+pip install onnxruntime
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 pip install git+https://github.com/microsoft/MoGe.git
 pip install google-generativeai
