@@ -126,11 +126,10 @@ of repaired objects.
 
 ---
 
-## Usage (Minimal Working Pipeline)
+## Usage (Underconstruction)
 
-This section describes the **minimal steps required to run the Kintsugi Splitter pipeline**.
-Following these commands will reproduce the core workflow:
-background removal → kintsugi-line detection → 3D reconstruction → fragment segmentation.
+We opensourced each steps python code and are working on providing minimum pipline code.
+This pipline will be provided soon!!!
 
 ---
 
