@@ -128,8 +128,10 @@ of repaired objects.
 
 ## Usage (Underconstruction)
 
-We opensourced each steps python code and are working on providing minimum pipline code.
-This pipline will be provided soon!!!
+We have open-sourced the Python code for each step of the pipeline.
+A minimal end-to-end pipeline script will be provided in a future update.
+
+Currently, each step can be executed individually using the provided notebooks or scripts.
 
 ---
 
@@ -155,6 +157,19 @@ Windows (PowerShell):
 
 ```powershell
 setx GEMINI_API_KEY "YOUR_API_KEY"
+```
+
+Linux / macOS (bash, zsh):
+
+```powershell
+export GEMINI_API_KEY="YOUR_API_KEY"
+```
+
+Google Colab:
+
+```powershell
+import os
+os.environ["GEMINI_API_KEY"] = "YOUR_API_KEY"
 ```
 
 ---
