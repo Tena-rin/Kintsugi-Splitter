@@ -191,8 +191,7 @@ Kintsugi Splitter works with two kinds of input images:
 
 ### Artificial Data (人工データ)
 These images are **not actually broken nor repaired**.  
-They are intact plates where **kintsugi-like lines were manually drawn using digital tools**  
-(e.g., Photoshop) to simulate fracture patterns and gold repairs.  
+They are intact plates where **kintsugi-like lines were manually drawn using digital tools** to simulate fracture patterns and gold repairs.  
 This allows testing under controlled conditions.
 
 ### Real Kintsugi Data (実データ)
