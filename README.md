@@ -122,7 +122,7 @@ The Kintsugi Splitter pipeline consists of five stages:
 This multi-step pipeline allows Kintsugi Splitter to preserve both the **form** and the **spirit**  
 of repaired objects.
 
-![Pipeline Overview](pipeline.png)
+![Pipeline Overview](Kintsugi-Splitter.png)
 
 ---
 
