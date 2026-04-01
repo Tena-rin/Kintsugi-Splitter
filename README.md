@@ -3,9 +3,9 @@ Digitally preserving the cultural and artistic value of kintsugi
 **by Tena-rin**
 
 Kintsugi Splitter is a project dedicated to **preserving the cultural, artistic, and philosophical value of kintsugi**,  
-the Japanese technique of repairing broken ceramics with gold.
+the Japanese technique of repairing broken pottery with gold.
 
-Rather than treating breakage as damage, kintsugi embraces it as a part of the object’s history.  
+Rather than treating breakage as damage, kintsugi embraces it as a art.  
 Kintsugi Splitter continues this philosophy in the digital era by using **AI-based reconstruction, segmentation,  
 and multimodal analysis** to archive repaired objects and make their stories accessible worldwide.
 
@@ -115,11 +115,11 @@ The Kintsugi Splitter pipeline consists of five stages:
    Removes gold lines and separates fragments using a two-stage DBSCAN method  
    based on local thickness estimation.
 
-5. **Metadata & story creation**  
+5. **Chronicle Integration**  
    Captures *material*, *origin*, *crafting environment*, and *artistic intent*  
    to preserve the cultural meaning behind the repair.
 
-This multi-step pipeline allows Kintsugi Splitter to preserve both the **form** and the **spirit**  
+These steps allow Kintsugi Splitter to preserve both the **form** and the **story**  
 of repaired objects.
 
 ![Pipeline Overview](Kintsugi-Splitter.png)
